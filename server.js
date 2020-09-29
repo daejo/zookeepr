@@ -110,11 +110,16 @@ app.post('/api/animals', (req, res) => {
     // set id based on what the next index of the array will be
     req.body.id = animals.length.toString();
   
-    // add animal to json file and animals array in this function
-    const animal = createNewAnimal(req.body, animals);
-  
-    res.json(animal);
+    // if any data in req.body is incorrect, send 400 error back
+    if (!validateAnimal(req.body)) {
+      res.status(400).send('The animal is not properly formatted.');
+    } else {
+      const animal = createNewAnimal(req.body, animals);
+      res.json(animal);
+    }
 });
+
+
 
 //SHOULD BE AT THE END OF CODE, 3001 is localport//
 app.listen(PORT, () => {
