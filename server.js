@@ -2,6 +2,7 @@
 //      git add -A
 //      git commit -m "Add Heroku"
 //      git push heroku feature/MVP:master
+//* to open HEROKU "heroku open" | https://mighty-mountain-26923.herokuapp.com/api/animals */
 // # You can use the `-y` flag to skip the package questionnaire and leave default answers
 // npm init -y
 // # You can use `npm i` as a shortcut for `npm install`
@@ -49,7 +50,12 @@ function filterByQuery(query, animalsArray) {
     }
     // return the filtered results:
     return filteredResults;
-  }
+}
+
+function findById(id, animalsArray) {
+    const result = animalsArray.filter(animal => animal.id === id)[0];
+    return result;
+}
   
 app.get('/api/animals', (req, res) => {
     let results = animals;
@@ -59,7 +65,16 @@ app.get('/api/animals', (req, res) => {
     res.json(results);
 });
 
+app.get('/api/animals/:id', (req, res) => {
+    const result = findById(req.params.id, animals);
+    if (result) {
+      res.json(result);
+    } else {
+      res.send(404);
+    }
+});
+
 //SHOULD BE AT THE END OF CODE, 3001 is localport//
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
-  });
+});
