@@ -74,6 +74,12 @@ app.get('/api/animals/:id', (req, res) => {
     }
 });
 
+app.post('/api/animals', (req, res) => {
+    // req.body is where our incoming content will be
+    console.log(req.body);
+    res.json(req.body);
+});
+
 //SHOULD BE AT THE END OF CODE, 3001 is localport//
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
