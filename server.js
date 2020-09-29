@@ -1,9 +1,14 @@
+        //*HEROKU */
+//      git add -A
+//      git commit -m "Add Heroku"
+//      git push heroku feature/MVP:master
 // # You can use the `-y` flag to skip the package questionnaire and leave default answers
 // npm init -y
 // # You can use `npm i` as a shortcut for `npm install`
 // npm i express
 const { animals } = require('./data/animals.json');
 const express = require("express");
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
@@ -55,6 +60,6 @@ app.get('/api/animals', (req, res) => {
 });
 
 //SHOULD BE AT THE END OF CODE, 3001 is localport//
-app.listen(3001, () => {
-    console.log(`API server now on port 3001!`);
-});
+app.listen(PORT, () => {
+    console.log(`API server now on port ${PORT}!`);
+  });
